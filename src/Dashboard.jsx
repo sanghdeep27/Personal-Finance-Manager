@@ -1,121 +1,188 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { ResponsiveContainer, LineChart,PieChart,Pie,Cell, Line, XAxis, YAxis, Legend, Tooltip } from "recharts";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import './Dash.css';
+import { Card, CardContent } from "./components/ui/card";
+import { Button } from "./components/ui/button"
 
+export default function PersonalFinanceDashboard() {
+  const [balance, setBalance] = useState(0);
+  const [income, setIncome] = useState(0);
+  const [expenses, setExpenses] = useState(0);
+  const [date, setDate] = useState(new Date());
+  const [showPopup, setShowPopup] = useState(false);
+  const [transactionType, setTransactionType] = useState("expense");
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const [transactions, setTransactions] = useState([]);
+  const [activePanel, setActivePanel] = useState("dashboard");
 
-const Dashboard = () => {
-      const [expenses, setExpenses] = useState([]);
-      const [balance, setBalance] = useState(0);
-  
-      const handleAddExpense = (e) => {
-          e.preventDefault();
-          const category = document.getElementById("expense-category").value;
-          let name = document.getElementById("expense-name").value.trim();
-          const amount = parseFloat(document.getElementById("expense-amount").value);
-          const type = document.getElementById("expense-type").value;
-          const date = document.getElementById("expense-date").value;
-  
-          if (!name) {
-              name = category;
-          }
-  
-          if (isNaN(amount) || amount <= 0) {
-              alert("Please enter a valid amount.");
-              return;
-          }
-  
-          const expense = { id: Date.now(), category, name, amount, type, date };
-          setExpenses((prev) => [...prev, expense]);
-          updateBalance([...expenses, expense]);
-      };
-  
-      const updateBalance = (expensesList) => {
-          const newBalance = expensesList.reduce(
-              (acc, expense) => (expense.type === "Credit" ? acc + expense.amount : acc - expense.amount),
-              0
-          );
-          setBalance(newBalance);
-      };
-  
-      const handleGenerateExcel = () => {
-          let table = document.querySelector(".expense-table table");
-          let wb = XLSX.utils.table_to_book(table, { sheet: "Expenses" });
-          XLSX.writeFile(wb, "Expense_Report.xlsx");
-      };
-  
-      return (
-          <div className='body'>
-              <h4>Personal Finance Manager</h4>
-              <div className="balance">
-                  <img src="wallet.png" alt="Balance Icon" />
-                  Balance: <span id="currency-symbol">₹</span>
-                  <span>{balance.toFixed(2)}</span>
-              </div>
-  
-              <form onSubmit={handleAddExpense}>
-    <div className="form-row">
-        <input type="number" id="expense-amount" placeholder="Amount" required />
-        <select id="currency-selector">
-            <option value="INR" selected>₹ (INR)</option>
-        </select>
-    </div>
+  const data = transactions.map((t) => ({
+    name: t.date,
+    income: t.type === "income" ? t.amount : 0,
+    expenses: t.type === "expense" ? t.amount : 0,
+  }));
 
-    <div className="form-row">
-        <select id="expense-category" required>
-            <option value="" disabled selected>Select Category</option>
-            <option value="Food">Food</option>
-            <option value="Drinks">Drinks</option>
-            <option value="Travel">Travel</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Others">Others</option>
-        </select>
-        <input type="text" id="expense-name" placeholder="Custom Expense Name (Optional)" />
-    </div>
+  const pieData = [
+    { name: "Income", value: income, color: "#0000FF" },
+    { name: "Expenses", value: expenses, color: "#FF0000" },
+    { name: "Savings", value: balance, color: "#00FF00" },
+  ];
 
-    <div className="form-row">
-        <select id="expense-type" required>
-            <option value="" disabled selected>Select Type</option>
-            <option value="Credit">Credit</option>
-            <option value="Debit">Debit</option>
-        </select>
-        <input type="date" id="expense-date" required />
-    </div>
-
-    <button type="submit">+ Add Expense</button>
-</form>
-
-  
-              <div className="expense-table">
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>Category</th>
-                              <th>Expense Name</th>
-                              <th>Amount</th>
-                              <th>Type</th>
-                              <th>Date</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          {expenses.map((expense) => (
-                              <tr key={expense.id}>
-                                  <td>{expense.category}</td>
-                                  <td>{expense.name}</td>
-                                  <td>₹{expense.amount.toFixed(2)}</td>
-                                  <td>{expense.type}</td>
-                                  <td>{expense.date}</td>
-                              </tr>
-                          ))}
-                      </tbody>
-                  </table>
-              </div>
-  
-              <button  id="generate-excel"  onClick={handleGenerateExcel}>Generate Excel</button>
-          </div>
-      );
+  const handleSaveTransaction = () => {
+    const amt = parseFloat(amount);
+    if (isNaN(amt) || amt <= 0) {
+      alert("Please enter a valid amount");
+      return;
+    }
+    const newTransaction = { date: date.toDateString(), type: transactionType, amount: amt, description };
+    setTransactions([...transactions, newTransaction]);
+    if (transactionType === "income") {
+      setIncome(income + amt);
+      setBalance(balance + amt);
+    } else {
+      setExpenses(expenses + amt);
+      setBalance(balance - amt);
+    }
+    setShowPopup(false);
+    setAmount("");
+    setDescription("");
   };
-  
 
-  
+  return (
+    <div className="dashboard-container">
+      {/* Sidebar */}
+      <div className="sidebar">
+        <h2 className="menu-title">Menu</h2>
+        <ul className="menu-list">
+          <li className={`menu-item ${activePanel === "dashboard" ? "active" : ""}`} onClick={() => setActivePanel("dashboard")}>Dashboard</li>
+          <li className={`menu-item ${activePanel === "transactions" ? "active" : ""}`} onClick={() => setActivePanel("transactions")}>Transactions</li>
+          <li className={`menu-item ${activePanel === "reports" ? "active" : ""}`} onClick={() => setActivePanel("reports")}>Reports</li>
+          <li className={`menu-item ${activePanel === "loans" ? "active" : ""}`} onClick={() => setActivePanel("loans")}>Loans</li>
+        </ul>
+      </div>
 
-export default Dashboard;
+      {/* Main Content */}
+      <div className="main-content">
+        {activePanel === "dashboard" && (
+          <>
+            {/* Summary Cards */}
+            <div className="card-container">
+              <div className="card balance-card">
+                <h4>Balance</h4>
+                <p>₹{balance}</p>
+              </div>
+              <div className="card income-card">
+                <h4>Income</h4>
+                <p>₹{income}</p>
+              </div>
+              <div className="card expense-card">
+                <h4>Expenses</h4>
+                <p>₹{expenses}</p>
+              </div>
+            </div>
+
+            {/* Calendar & Chart */}
+            <div className="dashboard-widgets">
+              <Calendar onClickDay={(selectedDate) => { setDate(selectedDate); setShowPopup(true); }} value={date} className="calendar" />
+              <div className="chart-container">
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={data}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Legend />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="income +" stroke="white" />
+                    <Line type="monotone" dataKey="expenses -" stroke="white" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* Add Transaction Popup */}
+            {showPopup && (
+              <div className="popup-overlay">
+                <div className="popup">
+                  <h2>Add Transaction</h2>
+                  <select value={transactionType} onChange={(e) => setTransactionType(e.target.value)} className="input-field">
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                  </select>
+                  <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} className="input-field" />
+                  <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} className="input-field" />
+                  <div className="button-group">
+                    <button onClick={() => setShowPopup(false)} className="cancel-button">Cancel</button>
+                    <button onClick={handleSaveTransaction} className="save-button">Save</button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Transactions Panel */}
+        {activePanel === "transactions" && (
+          <div className="transactions-panel">
+            <h2>Transactions</h2>
+            <table className="transactions-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((t, index) => (
+                  <tr key={index}>
+                    <td>{t.date}</td>
+                    <td>{t.type}</td>
+                    <td>₹{t.amount}</td>
+                    <td>{t.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {activePanel === "reports" && (
+          <div className="reports-container">
+            <h2>Financial Summary</h2>
+            {income || expenses || balance ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    dataKey="value"
+                    nameKey="name"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={100}
+                    label
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <p className="no-data-message">No data available for reports.</p>
+            )}
+            <div className="summary-details">
+              <p><strong>Total Income:</strong> ₹{income}</p>
+              <p><strong>Total Expenses:</strong> ₹{expenses}</p>
+              <p><strong>Current Balance:</strong> ₹{balance}</p>
+            </div>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+}
+        
+      

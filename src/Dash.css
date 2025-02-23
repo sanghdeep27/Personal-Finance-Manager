@@ -1,131 +1,183 @@
-body {
-    font-family: 'Inter', sans-serif;
-    background: url('background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    margin: 0;
-    padding: 20px;
-    color: white;
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-h4 {
-    font-size: 65px;
-    font-family: 'Times New Roman', serif;
-    font-weight: bold;
-    text-align: center;
-    padding: 5px;
-    color: #ffffff;
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
 }
 
-.balance {
-    font-size: 38px;
-    font-family: 'Franklin Gothic Medium', sans-serif;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.822);
-    margin-bottom: 25px;
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.073);
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #000000dc;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.balance img {
-    width: 30px;
-    height: 30px;
+/* Main Content */
+.main-content {
+  margin-left: 250px;
+  width: calc(100vw - 250px);
+  height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+li {
+ 
+  font-family: 'Franklin Gothic Medium';
+  font-size: 25px;
+  padding: 5px;
+  margin: 20px;
+  
 }
 
-form {
-    display: flex;
+/* Summary Cards */
+.card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 12px;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  max-width: 350px;
+}
+
+.balance-card {
+  background: linear-gradient(135deg, #000000, #1e1b1b);
+  font-size: 25px;
+  font-family: 'Franklin Gothic Medium';
+}
+
+.income-card {
+  background: linear-gradient(135deg, #000000, #1e1b1b);
+  font-size: 25px;
+  font-family: 'Franklin Gothic Medium';
+}
+
+.expense-card {
+  background: linear-gradient(135deg, #000000, #1e1b1b);
+  font-size: 25px;
+  font-family: 'Franklin Gothic Medium';
+}
+
+/* Dashboard Widgets */
+.dashboard-widgets {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.calendar,
+.chart-container {
+  flex: 1;
+  background: rgb(34, 32, 32);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  max-width: 100%;
+}
+
+/* Transactions Panel */
+.transactions-panel {
+  width: 100%;
+  background: rgb(0, 0, 0);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Transactions Table */
+.transactions-table {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+ 
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 12px;
+  text-align: center;
+  padding: 10px;
+}
+
+.transactions-table th {
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.transactions-table tr:nth-child(even) {
+  background: #000000;
+}
+
+/* Reports Section */
+.reports-container {
+  background: rgb(0, 0, 0);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  body {
     flex-direction: column;
-    gap: 12px;
-    max-width: 420px;
-    margin: auto;
-    padding: 25px;
-    border-radius: 10px;
-    background: rgb(0, 0, 0);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.134);
-    backdrop-filter: blur(10px);
-}
+  }
 
-.form-row {
-    display: flex;
-    gap: 12px;
-    justify-content: space-between ;
-}
-
-form input, form select, form button {
-    padding: 12px;
-    border-radius: 6px;
-    border: none;
-    font-size: 16px;
-    flex: 1;
-}
-.form-row input,
-.form-row select {
-    flex: 1; /* Makes all inputs and selects take equal space */
-    width: 100%; /* Ensures they stretch to the same width */
-    min-width: 0;
-}
-
-form .form-row input,
-form .form-row select {
-    flex: 1;
-}
-
-form button {
-    background: linear-gradient(135deg, #ff7eb3, #ff758c);
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s ease;
+  .sidebar {
     width: 100%;
-}
+    height: auto;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+  }
 
-form button:hover {
-    background: linear-gradient(135deg, #ff6584, #ff4763);
-}
+  .main-content {
+    margin-left: 0;
+    width: 100vw;
+  }
 
-.expense-table {
-    margin-top: 20px;
-    max-width: 700px;
-    margin: 20px;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.856);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
+  .dashboard-widgets {
+    flex-direction: column;
+  }
 
-.expense-table table {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
     width: 100%;
-    border-collapse: collapse;
-    color: white;
-}
-
-.expense-table th, .expense-table td {
-    padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: left;
-}
-
-#generate-excel {
-    background: linear-gradient(135deg, #34e89e, #0f3443);
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    padding: 12px;
-    border-radius: 6px;
-    width: 100%;
-    max-width: 120px;
-    margin: 20px auto;
-    display: block;
-    transition: 0.3s ease;
-}
-
-#generate-excel:hover {
-    background: linear-gradient(135deg, #2ecc71, #16a085);
+    max-width: 350px;
+  }
 }
