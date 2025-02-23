@@ -1,0 +1,131 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 20px;
+    color: white;
+}
+
+h4 {
+    font-size: 65px;
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    color: #ffffff;
+}
+
+.balance {
+    font-size: 38px;
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.822);
+    margin-bottom: 25px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.073);
+}
+
+.balance img {
+    width: 30px;
+    height: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 420px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    background: rgb(0, 0, 0);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.134);
+    backdrop-filter: blur(10px);
+}
+
+.form-row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between ;
+}
+
+form input, form select, form button {
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+    flex: 1;
+}
+.form-row input,
+.form-row select {
+    flex: 1; /* Makes all inputs and selects take equal space */
+    width: 100%; /* Ensures they stretch to the same width */
+    min-width: 0;
+}
+
+form .form-row input,
+form .form-row select {
+    flex: 1;
+}
+
+form button {
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+form button:hover {
+    background: linear-gradient(135deg, #ff6584, #ff4763);
+}
+
+.expense-table {
+    margin-top: 20px;
+    max-width: 700px;
+    margin: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.856);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.expense-table table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.expense-table th, .expense-table td {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
+}
+
+#generate-excel {
+    background: linear-gradient(135deg, #34e89e, #0f3443);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 120px;
+    margin: 20px auto;
+    display: block;
+    transition: 0.3s ease;
+}
+
+#generate-excel:hover {
+    background: linear-gradient(135deg, #2ecc71, #16a085);
+}
