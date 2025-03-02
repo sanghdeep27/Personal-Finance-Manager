@@ -17,7 +17,7 @@ html, body {
 .sidebar {
   width: 250px;
   height: 100vh;
-  background: #000000dc;
+  background: rgb(16, 16, 111);
   color: white;
   padding: 20px;
   position: fixed;
@@ -36,14 +36,58 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
+
 li {
  
   font-family: 'Franklin Gothic Medium';
   font-size: 25px;
   padding: 5px;
-  margin: 20px;
+  margin: 20px; 
+}
+li:hover{
+  
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-radius: 7px;
+  padding: 5px;
   
 }
+h5 {
+  font-size:35px;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(16, 16, 111);
+  padding: 10px;
+  font-family:'Franklin Gothic Medium';
+
+  
+  
+}
+/* Dashboard.css */
+.success-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
 
 /* Summary Cards */
 .card-container {
@@ -52,6 +96,7 @@ li {
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 20px;
+  margin: 10px;
 }
 
 .card {
@@ -65,21 +110,25 @@ li {
 }
 
 .balance-card {
-  background: linear-gradient(135deg, #000000, #1e1b1b);
+  background: linear-gradient(135deg, #0d2469,rgb(16, 16, 111));
+  border-left: 5px solid #047e7c;
   font-size: 25px;
   font-family: 'Franklin Gothic Medium';
+ 
 }
 
 .income-card {
-  background: linear-gradient(135deg, #000000, #1e1b1b);
+  background: linear-gradient(135deg, #0d2469,rgb(16, 16, 111));
   font-size: 25px;
   font-family: 'Franklin Gothic Medium';
+  border-left: 5px solid #047e7c;
 }
 
 .expense-card {
-  background: linear-gradient(135deg, #000000, #1e1b1b);
+  background: linear-gradient(135deg, #0d2469,rgb(16, 16, 111));
   font-size: 25px;
   font-family: 'Franklin Gothic Medium';
+  border-left: 5px solid #047e7c;
 }
 
 /* Dashboard Widgets */
@@ -89,23 +138,55 @@ li {
   flex-grow: 1;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 20px;
+
+ 
 }
 
 .calendar,
 .chart-container {
   flex: 1;
-  background: rgb(34, 32, 32);
+  background: rgb(255, 255, 255);
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   min-width: 300px;
   max-width: 100%;
+  height: 380px;
+  color: black;
+  color-scheme: black;
 }
+.input-field{
+  font-family: 'Franklin Gothic Medium';
+  color: black;
+  background-color: #ffffff;
+  border-radius: 12px;
+ 
+}
+.save-button{
+  margin: 10px;
+  background-color: rgb(16, 16, 111);
+  color: white;
+  width: 100px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium';
+}
+.cancel-button{
+  background-color: rgb(16, 16, 111);
+  color: white;
+  width: 100px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium';
 
+  }
 /* Transactions Panel */
 .transactions-panel {
   width: 100%;
-  background: rgb(0, 0, 0);
+  background: rgb(16, 16, 111);
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -115,7 +196,7 @@ li {
 .transactions-table {
   width: 100%;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 25px;
  
 }
 
@@ -124,6 +205,7 @@ li {
   padding: 12px;
   text-align: center;
   padding: 10px;
+ 
 }
 
 .transactions-table th {
@@ -131,23 +213,93 @@ li {
   color: rgb(0, 0, 0);
   border-radius: 8px;
   padding: 20px;
+
 }
 
 .transactions-table tr:nth-child(even) {
-  background: #000000;
+  background: #ffffff;
+  color: #ffffff;
 }
+.th{
+  background: rgb(16, 16, 111);
+  color: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
 
 /* Reports Section */
 .reports-container {
-  background: rgb(0, 0, 0);
+  background: rgb(16, 16, 111);
   border-radius: 12px;
-  padding: 20px;
+  padding: 30px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  margin: 20px auto;
+  width: 100%;
+  margin: 2px auto;
   text-align: center;
 }
+.summary-details{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(255, 255, 255);
+ 
+}
 
+.converter-widget{
+ 
+ 
+  margin: 2px auto;
+  text-align: center;
+}
+.currency-converter-container h2{
+  font-size: 35px;
+  font-weight: bold;
+ 
+  color: rgb(16, 16, 111);
+  padding: 10px;
+  font-family:'Franklin Gothic Medium';
+  margin: 10px;
+
+}
+.currency-converter-container{
+  font-size: 35px;
+  font-weight: bold;
+ 
+  color: rgb(16, 16, 111);
+  padding: 10px;
+  font-family:'Franklin Gothic Medium';
+
+  width: 100%;
+  margin: 2px auto;
+  text-align: center;
+
+}
+.card-balance-card{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  padding: 20px;
+  font-family:'Franklin Gothic Medium';
+  margin: 10px;
+  background: linear-gradient(135deg, #0d2469,rgb(16, 16, 111));
+  border-left: 5px solid #047e7c;
+  font-size: 25px;
+  font-family: 'Franklin Gothic Medium';
+  align-items: left;
+ 
+} 
+.inputs-field{
+  font-family: 'Franklin Gothic Medium';
+  color: black;
+  background-color: #ffffff;
+  border-radius: 7px;
+  width: 300px;
+  height: 30px;
+  margin: 20px;
+  
+}
 /* Responsive Design */
 @media (max-width: 900px) {
   body {

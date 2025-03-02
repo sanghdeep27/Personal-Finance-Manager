@@ -11,14 +11,14 @@ body {
     align-items: center;
     height: 100vh;
     background: #f3f3f3;
-    background: url('bg.jpg') 
+    
    
 }
 h1 {
     font-size:35px;
     font-weight: bold;
     text-align: center;
-    color: #000000;
+    color: rgb(16, 16, 111);
     padding: 0px;
     font-family:'Times New Roman';
     
@@ -35,7 +35,7 @@ h3{
     font-weight: bold;
     text-align: center;
     padding: 5px;
-    color: black;
+    color: rgb(16, 16, 111);
     font-family: 'Franklin Gothic Medium';
 }
 
@@ -71,7 +71,7 @@ h3{
 }
 
 .btn {
-    background: #000000;
+    background:rgb(16, 16, 111);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -83,7 +83,7 @@ h3{
 }
 .btn:hover {
     transform: scale(1.1);
-    background: #000000;
+    background: rgb(3, 3, 98);
 }
 
 .forgot-password {
@@ -103,7 +103,7 @@ h3{
     right: 0;
     width: 40%;
     height: 100%;
-    background: #000000;
+    background: rgb(16, 16, 111);
     color: white;
     display: flex;
     justify-content: center;
